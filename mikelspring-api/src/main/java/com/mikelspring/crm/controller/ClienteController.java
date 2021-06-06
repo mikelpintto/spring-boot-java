@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mikelspring.crm.model.Cliente;
 import com.mikelspring.crm.repository.ClienteRepository;
+import com.mikelspring.crm.services.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 
 	@GetMapping
 	public List<Cliente> listar(){
-		return clienteRepository.findAll();
+		return clienteService.getAll();
 		
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente adicionar(@RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+		return clienteService.save(cliente);
 	}
 }
